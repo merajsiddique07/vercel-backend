@@ -13,7 +13,10 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://vercel-frontend-pi-ten.vercel.app",
+    ],
     credentials: true,
   }),
 );
@@ -33,5 +36,9 @@ app.listen(PORT, () => {
 });
 
 //use below
+
+app.get("/", (req, res) => {
+  res.send("🚀 Backend Running");
+});
 
 app.use("/user", router);

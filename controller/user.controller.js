@@ -41,27 +41,10 @@ export const userLogin = async (req, res) => {
     if (!hashPassword) {
       return res.status(404).json({ meassage: "Wrong Password!" });
     }
-    const accessToken = generateAccessToken(user);
-    const refreshToken = generateRefreshToken(user);
-
-    res.cookie("accessToken", accessToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 15 * 60 * 1000,
-    });
-
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
     res.json({ message: "Login successful", userData });
   } catch (error) {
     console.error("LOGIN ERROR:", error);
-    res.status(500).json({ meassage: "Internal Server error!" });
+    res.status(500).json({ meassage: "Internal Server error!", err: error });
   }
 };
 //sending data

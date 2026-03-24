@@ -9,7 +9,6 @@ dotenv.config();
 export const userSignup = async (req, res) => {
   try {
     const { fullname, email, phone, password } = req.body;
-
     const hashPassword = await bcrypt.hash(password, 10);
     const User1 = await User.insertOne({
       fullname,
